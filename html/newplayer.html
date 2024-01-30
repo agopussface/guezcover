@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+         <h1>Joueur [x]</h1>
+        
+            <form action="/newplayer" method="GET">
+                <input type="text" id="name" placeholder="username">
+                <p id="secretWord"></p>
+
+                <button type="button" onclick='document.getElementById("secretWord").innerHTML = "Mot secret"'>
+                    Devoiler son mot
+                </button>
+                <input type="submit">
+            </form>
+            
+    </body>
+</html>
