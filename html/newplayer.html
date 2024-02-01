@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-         <h1>Joueur [x]</h1>
-        
-            <form action="/newplayer" method="GET">
-                <input type="text" id="name" placeholder="username">
-                <p id="secretWord"></p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="title"></h1>
 
-                <button type="button" onclick='document.getElementById("secretWord").innerHTML = "Mot secret"'>
-                    Devoiler son mot
-                </button>
-                <input type="submit">
-            </form>
-            
-    </body>
+    <form action="/newplayer" method="GET">
+        <input type="text" id="name" placeholder="username">
+        <p id="secretWord"></p>
+
+        <button type="button"
+            onclick='document.getElementById("secretWord").innerHTML = "Mot secret"'>
+            Devoiler son mot
+        </button>
+        <input type="submit">
+    </form>
+
+    <script>
+        // Attendre que le document soit complètement chargé avant de manipuler les éléments
+        document.addEventListener("DOMContentLoaded", function() {
+            // Récupérer la valeur de countPlayer depuis le cookie
+            const countPlayer = document.cookie.replace(/(?:(?:^|.*;\s*)countPlayer\s*=\s*([^;]*).*$)|^.*$/, "$1");
+            // Définir la valeur dans l'élément h1 avec l'id "title"
+            document.getElementById("title").innerText = "Count de players: " + countPlayer;
+        });
+    </script>
+</body>
 </html>

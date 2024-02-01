@@ -12,15 +12,17 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Déclaration des variables globales
-let nbPlayer;
+let nbPlayer = 0;
 let countPlayer = 0;
 
 app.get("/", (req, res) => {
   res.redirect("/newgame.html");
 });
 
-/* Route defgame
+/* Route defgame - Paramêtres gnéraux de la partie
  * Inscrit le nombre de joueurs dans une variable globale "nbPlayer"
+ * Affiche le nombre de joueurs dans la console
+ * Redirige vers newplayer
  */
 app.get("/defgame", (req, res) => {
   nbPlayer = req.query.inpPlayer;
@@ -28,19 +30,23 @@ app.get("/defgame", (req, res) => {
   res.redirect("/newplayer");
 });
 
-/* Route newplayer
+/* Route newplayer - Création du profil joueurs
+ * Incrémente countPlayeré
  * Redirige vers newplayer.html tant qu'il y'a des joueurs à créer (countPlayer < nbPlayer)
  * /Crée une session pour chaque nouveau joueurs, un par un)
+ * Stocker countPlayer dans un cookie
  */
 app.get("/newplayer", (req, res) => {
-  if (countPlayer < nbPlayer) {
+  countPlayer++;
+  if (countPlayer <= nbPlayer) {
+    res.cookie('countPlayer', countPlayer); 
     res.redirect("/newplayer.html");
-    countPlayer++;
   } else {
     res.redirect("/game");
   }
   console.log("cp " + countPlayer);
 });
+
 
 /* Route game
  * Affiche le jeu
